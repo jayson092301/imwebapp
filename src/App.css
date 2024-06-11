@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  min-height: 97vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container {
+  background-color: #222;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#outlined-basic {
+  background-color: white;
+  
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.input-container {
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 200px;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(to right, #00aaff, #0066ff);
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: linear-gradient(to right, #0066ff, #00aaff);
+}
+
+a {
+  color: #ff4444;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
