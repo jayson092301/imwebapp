@@ -1,77 +1,112 @@
-.App {
-  text-align: center;
-  background-color: #333;
-  color: #fff;
-  min-height: 97vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-}
 
-.App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
+/*new log in*/
 .login-container {
-  background-color: #222;
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-#outlined-basic {
-  background-color: white;
+  text-align: center;
+  padding: 50px;
   
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.login-box {
+  background-color: white;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0;
 }
 
-.avatar {
+.icon img {
   width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
 }
 
-.input-container {
-  margin-bottom: 1rem;
+.input-group {
+  margin: 15px 0;
 }
 
-input[type="text"],
-input[type="password"] {
-  width: 200px;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
-}
-
-.login-button {
+input {
   width: 100%;
-  padding: 0.5rem;
-  border: none;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  background: linear-gradient(to right, #00aaff, #0066ff);
-  color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
-.login-button:hover {
-  background: linear-gradient(to right, #0066ff, #00aaff);
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius:5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  margin-top: 20px;
 }
 
 a {
-  color: #ff4444;
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/*register*/
+.register-container {
+  text-align: center;
+  padding: 50px;
+}
+
+.register-box {
+  background-color: white;
+  border-radius: 10px;
+  display: inline-block;
+  padding: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.icon img {
+  width: 50px;
+}
+
+.input-group {
+  margin: 15px 0;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+p {
+  margin-top: 20px;
+}
+
+a {
+  color: #007bff;
   text-decoration: none;
 }
 
