@@ -7,9 +7,6 @@ const Patient = () => {
       <Paper elevation={3}>
         <h2 style={{padding:'10px'}}>Add Patient</h2>
       </Paper>
-        
-      
-      
       {/* Patient content goes here */}
     </div>
   );

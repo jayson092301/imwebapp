@@ -1,9 +1,12 @@
 import React from 'react';
+import { Paper } from '@mui/material';
 
 const Other = () => {
   return (
     <div>
-      <h2>Patient Management</h2>
+      <Paper elevation={3}>
+        <h2 style={{padding:'10px'}}>Other</h2>
+      </Paper>
       {/* Patient content goes here */}
     </div>
   );

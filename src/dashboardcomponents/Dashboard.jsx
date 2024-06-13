@@ -31,7 +31,7 @@ const Dashboard = () => {
           </Link>
           <Link to="supply">
             <div className="icon">
-              <img src="../../img/supply.jpg" alt="Supply" />
+              <img src="../../img/supply.png" alt="Supply" />
               <p>Supply</p>
             </div>
           </Link>
@@ -43,7 +43,7 @@ const Dashboard = () => {
           </Link>
           <Link to="other">
             <div className="icon">
-              <img src="path_to_other_icon" alt="Other" />
+              <img src="../../img/other.png" alt="Other" />
               <p>Other</p>
             </div>
           </Link>
