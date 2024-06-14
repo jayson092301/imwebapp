@@ -17,6 +17,20 @@ const Patient = () => {
       </div>
       </Paper>
       <div>
+        <Box>
+          <Paper elevation={1}>
+            <p style={{margin:'10px'}}><b>Patient Information</b></p>
+          </Paper>
+          <Paper>
+            <p style={{margin:'10px'}}><b>Next of Kin Details</b></p>
+          </Paper>
+          <Paper>
+            <p style={{margin:'10px'}}><b>Local Doctor Referrals</b></p>
+          </Paper>
+          <Paper>
+            <p style={{margin:'10px'}}><b>Appointment</b></p>
+          </Paper>
+        </Box>
       </div>
       {/* Patient content goes here */}
     </div>
