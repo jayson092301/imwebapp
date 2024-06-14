@@ -1,4 +1,4 @@
-import { Box, Paper, Button, TextField, Collapse, Typography } from '@mui/material';
+import { Box, Paper, Button, TextField, Collapse, Typography, Grid, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
 import React, { useState } from 'react';
 
 const ExpandableForm = ({ title, children }) => {
@@ -11,12 +11,12 @@ const ExpandableForm = ({ title, children }) => {
   return (
     <Box sx={{ width: '100%', textAlign: 'left', mt: 2 }}>
       <Paper elevation={1} onClick={toggleForm} sx={{ cursor: 'pointer', p: 2 }}>
-        <Typography variant="p">
+        <Typography variant="body1">
           {isExpanded ? `Hide ${title}` : title}
         </Typography>
       </Paper>
       <Collapse in={isExpanded}>
-        <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 1, mt: 2 }}>
+        <Box component="form" sx={{ mt: 2 }}>
           {children}
         </Box>
       </Collapse>
