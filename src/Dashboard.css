@@ -102,3 +102,14 @@
     color: #fff;
   }
   
+  /* welcome*/
+  .welcome-page {
+    display: flex;
+    height: 100vh;
+}
+
+.welcome-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
