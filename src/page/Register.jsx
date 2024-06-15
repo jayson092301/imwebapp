@@ -26,7 +26,7 @@ const Register = () => {
             <TextField required id="outlined-basic" label="Confirm Password" type= "password" variant="outlined" />
           </div>
           <div>
-            <Link to="/dashboard">
+            <Link to="/welcome">
                 <button type="submit">Sign up</button>
             </Link>
           </div>

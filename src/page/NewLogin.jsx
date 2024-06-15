@@ -20,7 +20,7 @@ const NewLogIn = () => {
             <TextField required id="outlined-basic" label="Password" type= "password" variant="outlined" />
           </div>
           <div>
-            <Link to="/dashboard">
+            <Link to="/welcome">
                 <button type="submit">Login</button>
             </Link>
           </div>
