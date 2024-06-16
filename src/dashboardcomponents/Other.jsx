@@ -15,48 +15,42 @@ const Other = () => {
       <Paper elevation={3}>
         <div className="icon" style={{ display: 'flex' }}>
           <div style={{ margin: '8px' }}>
-            <img src="../../img/other.png" alt="Other" />
+            <img src="../../img/other.png" alt="Other section icon" />
           </div>
           <div>
             <h2 style={{ marginLeft: '10px' }}>Other</h2>
           </div>
         </div>
       </Paper>
-      <div>
-        <Box>
-          <div>
-            <ExpandableForm title="Local Doctor Information">
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <TableContainer component={Paper}>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Clinic Number</TableCell>
-                          <TableCell>Full Name</TableCell>
-                          <TableCell>Address</TableCell>
-                          <TableCell>Telephone Number</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {localDoctorInfo.map((doctor, index) => (
-                          <TableRow key={index}>
-                            <TableCell>{doctor.clinicNumber}</TableCell>
-                            <TableCell>{doctor.fullName}</TableCell>
-                            <TableCell>{doctor.address}</TableCell>
-                            <TableCell>{doctor.telephoneNumber}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Grid>
-              </Grid>
-            </ExpandableForm>
-          </div>
-        </Box>
-        <div>
-          
+      <Box>
+        <ExpandableForm title="Local Doctor Information">
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Clinic Number</TableCell>
+                      <TableCell>Full Name</TableCell>
+                      <TableCell>Address</TableCell>
+                      <TableCell>Telephone Number</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {localDoctorInfo.map((doctor, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{doctor.clinicNumber}</TableCell>
+                        <TableCell>{doctor.fullName}</TableCell>
+                        <TableCell>{doctor.address}</TableCell>
+                        <TableCell>{doctor.telephoneNumber}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+          </Grid>
+        </ExpandableForm>
         <ExpandableForm title="FAQs">
           <Grid container spacing={2}>
             <Grid item xs={6} sm={3}>
@@ -65,10 +59,8 @@ const Other = () => {
               <p>Hiring?</p>
             </Grid>
           </Grid>
-          </ExpandableForm>
-        </div>
-      </div>
-      {/* Patient content goes here */}
+        </ExpandableForm>
+      </Box>
     </div>
   );
 };

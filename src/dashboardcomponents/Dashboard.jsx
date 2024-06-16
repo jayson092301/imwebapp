@@ -44,13 +44,13 @@ const Dashboard = () => {
                 <div className="search-bar-container" style={{ textAlign: 'center', marginLeft: '270px', marginRight: '0px' }}>
                   <TextField
                     id="outlined-basic"
-                    label="Search"
+                    label="Search Patient"
                     variant="outlined"
                     size="small"
                     className="search-bar"
                     InputProps={{
                       endAdornment: (
-                        <InputAdornment position="end">
+                        <InputAdornment position="start">
                           <SearchIcon />
                         </InputAdornment>
                       ),
