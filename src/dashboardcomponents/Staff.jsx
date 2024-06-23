@@ -658,7 +658,7 @@ const Staff = () => {
           </div>
 
           <Button style={{marginTop:'10px'}} variant="contained" color="primary" onClick={handleOpenPopup}>
-            Open Staff List Popup
+            List of Staff
           </Button>
 
           <StaffListPopup open={staffListPopupOpen} onClose={handleClosePopup} />

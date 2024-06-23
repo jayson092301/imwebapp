@@ -1,17 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Paper, Button, TextField, Grid, MenuItem, Select, InputLabel, FormControl, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import ExpandableForm from './ExpandableForm';
+import { supabase } from '../supabaseClient'; // Your Supabase client setup
 
 const Prescription = () => {
   const [prescriptionInfo, setPrescriptionInfo] = useState({
-    patientName: '',
-    drug: '',
+    patientId: '',
+    drugId: '',
     startDate: '',
     endDate: '',
     unitsPerDay: 1,
   });
 
+  const [patients, setPatients] = useState([]);
+  const [drugs, setDrugs] = useState([]);
   const [administeredPrescriptions, setAdministeredPrescriptions] = useState([]);
+
+  useEffect(() => {
+    const fetchPatients = async () => {
+      const { data, error } = await supabase
+        .from('patient')
+        .select('patient_number, first_name, last_name');
+
+      if (error) {
+        console.error('Error fetching patients:', error);
+      } else {
+        setPatients(data);
+      }
+    };
+
+    const fetchDrugs = async () => {
+      const { data, error } = await supabase
+        .from('pharmaceutical_supply')
+        .select(`
+          drug_number, 
+          supply_id,
+          supply (supply_name)
+        `);
+
+      if (error) {
+        console.error('Error fetching drugs:', error);
+      } else {
+        // Flatten the data to include the supply_name directly in the drug object
+        const flattenedData = data.map(drug => ({
+          drug_number: drug.drug_number,
+          supply_id: drug.supply_id,
+          supply_name: drug.supply.supply_name
+        }));
+        setDrugs(flattenedData);
+      }
+    };
+
+    fetchPatients();
+    fetchDrugs();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,29 +63,48 @@ const Prescription = () => {
     }));
   };
 
-  const handleCreatePrescriptionSubmit = (e) => {
+  const handleCreatePrescriptionSubmit = async (e) => {
     e.preventDefault();
     const newPrescription = { ...prescriptionInfo };
     setAdministeredPrescriptions((prev) => [...prev, newPrescription]);
-    // Clear input fields after submission
-    setPrescriptionInfo({
-      patientName: '',
-      drug: '',
-      startDate: '',
-      endDate: '',
-      unitsPerDay: 1,
-    });
+    
+    // Insert new prescription to the database
+    const { error } = await supabase
+      .from('prescriptions')
+      .insert(newPrescription);
+
+    if (error) {
+      console.error('Error creating prescription:', error);
+    } else {
+      // Clear input fields after submission
+      setPrescriptionInfo({
+        patientId: '',
+        drugId: '',
+        startDate: '',
+        endDate: '',
+        unitsPerDay: 1,
+      });
+    }
   };
 
-  const handleAdministerSubmit = (e) => {
+  const handleAdministerSubmit = async (e) => {
     e.preventDefault();
-    setAdministeredPrescriptions((prev) => [...prev, { ...prescriptionInfo }]);
+    const { error } = await supabase
+      .from('administered_prescriptions')
+      .insert({ ...prescriptionInfo });
+
+    if (error) {
+      console.error('Error administering prescription:', error);
+    } else {
+      setAdministeredPrescriptions((prev) => [...prev, { ...prescriptionInfo }]);
+    }
   };
 
   const formatPrescriptionDetails = () => {
-    const { drug, unitsPerDay, startDate, endDate } = prescriptionInfo;
+    const { drugId, unitsPerDay, startDate, endDate } = prescriptionInfo;
+    const drug = drugs.find(d => d.supply_id === drugId);
     if (drug && unitsPerDay && startDate && endDate) {
-      return `Drug: ${drug}, Units/Day: ${unitsPerDay}, Start Date: ${startDate}, End Date: ${endDate}`;
+      return `Drug: ${drug.supply_name}, Units/Day: ${unitsPerDay}, Start Date: ${startDate}, End Date: ${endDate}`;
     } else {
       return "Please fill in all fields";
     }
@@ -63,7 +124,7 @@ const Prescription = () => {
       </Paper>
       <div style={{ margin: '15px' }}>
         <div style={{ textAlign: 'center' }}>
-          <span><b>In-Patient</b></span>
+          <span><b>Patient</b></span>
           <Grid item xs={12} sm={6}>
             <TextField
               label="Patient Name"
@@ -72,13 +133,15 @@ const Prescription = () => {
               select
               required
               size="small"
-              name="patientName"
-              value={prescriptionInfo.patientName}
+              name="patientId"
+              value={prescriptionInfo.patientId}
               onChange={handleInputChange}
             >
-              <MenuItem value="name1">Name 1</MenuItem>
-              <MenuItem value="name2">Name 2</MenuItem>
-              <MenuItem value="name3">Name 3</MenuItem>
+              {patients.map(patient => (
+                <MenuItem key={patient.patient_number} value={patient.patient_number}>
+                  {`${patient.first_name} ${patient.last_name}`}
+                </MenuItem>
+              ))}
             </TextField>
           </Grid>
         </div>
@@ -90,15 +153,16 @@ const Prescription = () => {
                   <InputLabel>Drug</InputLabel>
                   <Select
                     label="Drug"
-                    name="drug"
-                    value={prescriptionInfo.drug}
+                    name="drugId"
+                    value={prescriptionInfo.drugId}
                     onChange={handleInputChange}
                     required
                   >
-                    <MenuItem value="Actifed Dry Coughs - 48 puffs">Actifed Dry Coughs - 48 puffs</MenuItem>
-                    <MenuItem value="Paracetamol">Paracetamol</MenuItem>
-                    <MenuItem value="Tuseran">Tuseran</MenuItem>
-                    <MenuItem value="Sleeping Pills">Sleeping Pills</MenuItem>
+                    {drugs.map(drug => (
+                      <MenuItem key={drug.supply_id} value={drug.supply_id}>
+                        {`${drug.drug_number} - ${drug.supply_name}`}
+                      </MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </Grid>
@@ -192,7 +256,7 @@ const Prescription = () => {
               <TableBody>
                 {administeredPrescriptions.map((prescription, index) => (
                   <TableRow key={index}>
-                    <TableCell>{prescription.drug}</TableCell>
+                    <TableCell>{drugs.find(d => d.supply_id === prescription.drugId)?.supply_name}</TableCell>
                     <TableCell>{prescription.unitsPerDay}</TableCell>
                     <TableCell>{prescription.startDate}</TableCell>
                     <TableCell>{prescription.endDate}</TableCell>
