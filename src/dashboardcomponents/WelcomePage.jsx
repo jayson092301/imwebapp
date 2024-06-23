@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
-import { Container, Grid, Paper, Typography, styled } from '@mui/material'; // Import styled from @mui/material
+import { Container, Grid, Paper, Typography, styled } from '@mui/material'; 
 import { supabase } from '../supabaseClient';
 
 const ColoredPaper = styled(Paper)({
-  backgroundColor: '#f0f0f0', // Example background color
-  padding: '20px', // Example padding
-  borderRadius: '8px', // Example border radius
+  backgroundColor: '#f0f0f0', 
+  padding: '20px', 
+  borderBottomRightRadius: '50px', 
+  borderTopLeftRadius: '50px'
 });
 
 
